@@ -45,8 +45,9 @@ class CSVFileHandler:
         """
         try:
             table_name = re.match(self.filename_pattern, os.path.basename(filepath)).group(1)
-            df = pd.read_csv(filepath, encoding='utf-8', low_memory=False)
+            # df = pd.read_csv(filepath, sep='|', encoding='unicode_escape', low_memory=False)
+            df = pd.read_csv(filepath, sep='|', encoding='utf-8', low_memory=False)
             return table_name, df
         except Exception as e:
             logger.error(f'Error parsing CSV file: {e}', exc_info=True)
-            return None, None
+            raise

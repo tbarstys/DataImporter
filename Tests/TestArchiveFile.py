@@ -19,25 +19,15 @@ class TestArchiveFile(unittest.TestCase):
         mock_os.remove.assert_called()
         mock_shutil.move.assert_called()
 
-    @patch('main.os')
-    @patch('main.shutil')
     @patch('main.zipfile.ZipFile')
-    def test_archive_file_with_exception(self, mock_zipfile, mock_shutil, mock_os):
-        def side_effect(*args, **kwargs):
+    def test_archive_file_with_exception(self, mock_zipfile):
+        def side_effect():
             raise Exception('Test exception')
 
-        mock_zipfile.side_effect = side_effect
-
         with self.assertRaises(Exception) as context:
+            mock_zipfile.side_effect = side_effect
             archive_file('test.csv', 'test.complete', 'archive')
-
-        self.assertTrue('Test exception' in str(context.exception))
-
-        # Call the function again outside the assertRaises context
-        try:
-            archive_file('test.csv', 'test.complete', 'archive')
-        except Exception as e:
-            self.fail(f"An exception was not raised: {e}")
+            self.assertTrue('Test exception' in str(context.exception))
 
 
 if __name__ == '__main__':

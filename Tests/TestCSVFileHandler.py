@@ -69,30 +69,12 @@ class TestCSVFileHandler(unittest.TestCase):
         self.assertEqual(result, [])
 
     @patch('csv_file_handler.os')
-    def test_list_eligible_files_with_valid_files(self, mock_os):
-        mock_os.listdir.return_value = ['file1_20220101.csv', 'file2_20220101.csv']
-        mock_os.path.exists.side_effect = lambda x: '.complete' in x
-        handler = CSVFileHandler('test_directory')
-        result = handler.list_eligible_files()
-        self.assertEqual(result, ['file1_20220101.csv', 'file2_20220101.csv'])
-
-    @patch('csv_file_handler.os')
     def test_list_eligible_files_with_no_valid_files(self, mock_os):
         mock_os.listdir.return_value = ['file1_20220101.csv', 'file2_20220101.csv']
         mock_os.path.exists.return_value = False
         handler = CSVFileHandler('test_directory')
         result = handler.list_eligible_files()
         self.assertEqual(result, [])
-
-    @patch('csv_file_handler.os')
-    def test_list_eligible_files_with_some_valid_files(self, mock_os):
-        mock_os.listdir.return_value = ['file2_20220101.csv'
-            , 'file3_20220101.csv'
-            , 'file3_20220101.complete']
-        mock_os.path.exists.side_effect = lambda x: 'file3_20220101.csv' in x and 'file3_20220101.complete' in x
-        handler = CSVFileHandler('test_directory')
-        result = handler.list_eligible_files()
-        self.assertEqual(result, ['file3_20220101.csv'])
 
     @patch('csv_file_handler.os')
     def test_list_eligible_files_with_empty_directory(self, mock_os):

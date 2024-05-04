@@ -7,6 +7,7 @@ import zipfile
 import yaml
 from csv_file_handler import CSVFileHandler
 from database_importer import DatabaseImporter
+from data_migrator import DataMigrator
 
 logger = logging.getLogger(__name__)
 
@@ -53,11 +54,11 @@ def archive_file(csv_file_path, complete_file_path, archive_dir_path):
         logger.error(f'Error archiving file: {e}', exc_info=True)
 
 
-def main(path, server, database):
-    setup_logging()
+def main(path, server, database_stg, database_dwh):
+    setup_logging(default_level=logging.DEBUG)
 
     try:
-        logger.info(f'Importing data from {path} to {server}/{database}')
+        logger.info(f'Importing data from {path} to {server}/{database_stg}')
         file_handler = CSVFileHandler(path)
         eligible_files = file_handler.list_eligible_files()
         for file in eligible_files:
@@ -68,7 +69,7 @@ def main(path, server, database):
                 logger.info(f'Parsed CSV file {file} into DataFrame and table name {table_name}')
 
                 # Import the data to SQL
-                data_importer = DatabaseImporter(server, database)
+                data_importer = DatabaseImporter(server, database_stg)
                 data_importer.insert_data(table_name, df, file_with_path)
 
                 # Archive the file
@@ -80,6 +81,10 @@ def main(path, server, database):
 
             else:
                 logger.error(f'Error parsing CSV file {file}')
+
+        # Run the data migration process
+        migrator = DataMigrator(server, database_stg, database_dwh)
+        migrator.run_migration()
     except Exception as e:
         logger.error(f'Error importing data: {e}', exc_info=True)
         raise
@@ -89,7 +94,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Data Importer from CSV to SQL')
     parser.add_argument('--path', type=str, required=True, help='CSV file path')
     parser.add_argument('--server', type=str, required=True, help='SQL Server name to import data')
-    parser.add_argument('--database', type=str, required=True, help='SQL Database name to import data')
+    parser.add_argument('--database_stg', type=str, required=True, help='SQL STG Database name to import data')
+    parser.add_argument('--database_dwh', type=str, required=True, help='SQL DWH Database name to import data')
     args = parser.parse_args()
 
-    main(args.path, args.server, args.database)
+    main(args.path, args.server, args.database_stg, args.database_dwh)

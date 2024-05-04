@@ -13,7 +13,7 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-    <option name="PARAMETERS" value="--path C:\Users\tadas\source\data --server Tadas-Think\\T --database NT_STG" />
+    <option name="PARAMETERS" value="--path C:\Users\tadas\source\data --server Tadas-Think\T --database_stg NT_STG --database_dwh NT_DWH" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

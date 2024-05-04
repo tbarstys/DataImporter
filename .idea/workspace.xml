@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/Tests/TestArchiveFile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestCSVFileHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestSetupLogging.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/TestDataMigrator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/TestDatabaseConnector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_migrator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database_connector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestArchiveFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestArchiveFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestCSVFileHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestCSVFileHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv_file_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/csv_file_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_importer.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_importer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
@@ -53,13 +61,24 @@
   "keyToString": {
     "Python tests.All Python tests.executor": "Run",
     "Python tests.Python tests for TestArchiveFile.TestArchiveFile.executor": "Run",
+    "Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path.executor": "Run",
+    "Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_with_exception.executor": "Run",
     "Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist.executor": "Debug",
+    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_exists.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval_no_tables.executor": "Run",
+    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_connection_exception.executor": "Run",
+    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection.executor": "Run",
+    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection_dwh.executor": "Run",
     "Python tests.Python tests for TestSetupLogging.TestSetupLogging.executor": "Run",
     "Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile.executor": "Run",
     "Python tests.Python tests for test_main.TestArchiveFile.executor": "Run",
     "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_happy_path.executor": "Run",
     "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_with_exception.executor": "Run",
-    "Python.main.executor": "Run",
+    "Python tests.Python tests in Tests.executor": "Run",
+    "Python.main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "full.screen.before.presentation.mode": "false",
@@ -73,8 +92,8 @@
     <option name="ciType" value="GITHUB" />
     <option name="path" value="$PROJECT_DIR$/.github/workflows/qodana_code_quality.yml" />
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files">
-    <configuration name="All Python tests" type="tests" factoryName="Autodetect" temporary="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,26 +104,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestSetupLogging, TestArchiveFile, TestCSVFileHandler&quot;" />
-      <option name="_new_targetType" value="&quot;CUSTOM&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="DataImport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files&quot;" />
+      <option name="_new_target" value="&quot;TestArchiveFile.TestArchiveFile.test_archive_file_happy_path&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestSetupLogging.TestSetupLogging" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for TestDataMigrator.DataMigratorTest" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,11 +119,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestSetupLogging.TestSetupLogging&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for Tests.TestArchiveFile.TestArchiveFile" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,11 +134,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;Tests.TestArchiveFile.TestArchiveFile&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for Tests.TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -145,25 +149,40 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;Tests.TestArchiveFile.TestArchiveFile.test_archive_file_happy_path&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in Tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="DataImport" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files" />
-      <item itemvalue="Python tests.All Python tests" />
-      <item itemvalue="Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile" />
-      <item itemvalue="Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
-      <item itemvalue="Python tests.Python tests for TestSetupLogging.TestSetupLogging" />
+      <item itemvalue="Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" />
+      <item itemvalue="Python tests.Python tests in Tests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files" />
-        <item itemvalue="Python tests.All Python tests" />
-        <item itemvalue="Python tests.Python tests for TestSetupLogging.TestSetupLogging" />
-        <item itemvalue="Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile" />
-        <item itemvalue="Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
+        <item itemvalue="Python tests.Python tests in Tests" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" />
+        <item itemvalue="Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
       </list>
     </recent_temporary>
   </component>
@@ -207,5 +226,22 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Tests/TestDataMigrator.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="stg_table" />
+        <watch expression="stg_table.c" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
