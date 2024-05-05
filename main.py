@@ -109,9 +109,9 @@ if __name__ == '__main__':
     # Argument parser for command line arguments
     parser = argparse.ArgumentParser(description='Data Importer from CSV to SQL')
     parser.add_argument('--path', type=str, required=True, help='CSV file path')
-    parser.add_argument('--server', type=str, required=True, help='SQL Server name to import data')
-    parser.add_argument('--database_stg', type=str, required=True, help='SQL STG Database name to import data')
-    parser.add_argument('--database_dwh', type=str, required=True, help='SQL DWH Database name to import data')
+    parser.add_argument('--server', type=str, required=True, help='SQL Server to import data')
+    parser.add_argument('--database_stg', type=str, required=True, help='SQL STG Database to import data')
+    parser.add_argument('--database_dwh', type=str, required=True, help='SQL DWH Database to import data')
     args = parser.parse_args()
 
     main(args.path, args.server, args.database_stg, args.database_dwh)

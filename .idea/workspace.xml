@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Add Docs">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Add README.md">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestDataMigrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestDataMigrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +62,9 @@
     "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_exists.executor": "Run",
     "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval.executor": "Run",
     "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval_no_tables.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_hash_row.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table.executor": "Run",
+    "Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table_with_exception.executor": "Run",
     "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_connection_exception.executor": "Run",
     "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection.executor": "Run",
     "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection_dwh.executor": "Run",
@@ -68,6 +73,7 @@
     "Python tests.Python tests for test_main.TestArchiveFile.executor": "Run",
     "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_happy_path.executor": "Run",
     "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_with_exception.executor": "Run",
+    "Python tests.Python tests in TestDataMigrator.py.executor": "Run",
     "Python tests.Python tests in Tests.executor": "Run",
     "Python.main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -83,8 +89,8 @@
     <option name="ciType" value="GITHUB" />
     <option name="path" value="$PROJECT_DIR$/.github/workflows/qodana_code_quality.yml" />
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in Tests">
-    <configuration name="Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table_with_exception">
+    <configuration name="Python tests for TestDataMigrator.TestDataMigrator.test_hash_row" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -95,11 +101,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestArchiveFile.TestArchiveFile.test_archive_file_happy_path&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.TestDataMigrator.test_hash_row&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestDataMigrator.DataMigratorTest" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for TestDataMigrator.TestDataMigrator.test_process_table" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,11 +116,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.TestDataMigrator.test_process_table&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for TestDataMigrator.TestDataMigrator.test_process_table_with_exception" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,11 +131,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist&quot;" />
+      <option name="_new_target" value="&quot;TestDataMigrator.TestDataMigrator.test_process_table_with_exception&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in TestDataMigrator.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,8 +146,8 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Tests/TestDataMigrator.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests in Tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -161,19 +167,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
-      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
-      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" />
-      <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_hash_row" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table" />
+      <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table_with_exception" />
+      <item itemvalue="Python tests.Python tests in TestDataMigrator.py" />
       <item itemvalue="Python tests.Python tests in Tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table_with_exception" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_process_table" />
         <item itemvalue="Python tests.Python tests in Tests" />
-        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" />
-        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" />
-        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
-        <item itemvalue="Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
+        <item itemvalue="Python tests.Python tests in TestDataMigrator.py" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.TestDataMigrator.test_hash_row" />
       </list>
     </recent_temporary>
   </component>
@@ -214,7 +220,14 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1714909862109</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="Add README.md">
+      <option name="closed" value="true" />
+      <created>1714910470325</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1714910470325</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -232,18 +245,10 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Add data migrator class and some tests" />
     <MESSAGE value="Add Docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Docs" />
+    <MESSAGE value="Add README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add README.md" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Tests/TestDataMigrator.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="stg_table" />
