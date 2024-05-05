@@ -1,27 +1,39 @@
 import logging
 from sqlalchemy import create_engine
 
+# Setting up logger
 logger = logging.getLogger(__name__)
 
 
 class DatabaseConnector:
     """
-    The DatabaseConnector class is responsible for establishing a connection to a database.
+    A class used to establish a connection to a database.
 
-    Attributes:
-        server (str): The server where the database is hosted.
-        database (str): The name of the database to connect to.
-        engine (Engine): The SQLAlchemy engine object representing the database connection.
-            This is None until a connection is established.
+    ...
+
+    Attributes
+    ----------
+    server : str
+        The server where the database is hosted.
+    database : str
+        The name of the database to connect to.
+    engine : Engine
+        The SQLAlchemy engine object representing the database connection.
+
+    Methods
+    -------
+    connect()
+        Establishes a connection to the database and returns the engine object.
     """
 
     def __init__(self, server, database):
         """
-        The constructor for the DatabaseConnector class.
+        Constructs all the necessary attributes for the DatabaseConnector object.
 
-        Parameters:
-            server (str): The server where the database is hosted.
-            database (str): The name of the database to connect to.
+        :param server: str
+            The server where the database is hosted.
+        :param database: str
+            The name of the database to connect to.
         """
         self.server = server
         self.database = database
@@ -37,11 +49,10 @@ class DatabaseConnector:
         returns the engine object. If an exception occurs during the connection process, the method logs the error
         and re-raises the exception.
 
-        Returns:
-            Engine: An SQLAlchemy engine object representing the database connection.
-
-        Raises:
-            Exception: If there is an error connecting to the database.
+        :return: Engine
+            An SQLAlchemy engine object representing the database connection.
+        :raises Exception:
+            If there is an error connecting to the database.
         """
         try:
             logger.info(f'Connecting to database {self.server}/{self.database}')

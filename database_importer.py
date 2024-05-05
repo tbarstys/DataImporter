@@ -6,11 +6,52 @@ from sqlalchemy import create_engine, Index, MetaData, Table, Column, Integer, S
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql.ddl import CreateIndex
 
+# Setting up logger
 logger = logging.getLogger(__name__)
 
 
 class DatabaseImporter:
+    """
+    A class used to import data from a DataFrame into a database.
+
+    ...
+
+    Attributes
+    ----------
+    server : str
+        The server where the database is hosted.
+    database : str
+        The name of the database to connect to.
+    engine : Engine
+        The SQLAlchemy engine object representing the database connection.
+    table : Table
+        The SQLAlchemy Table object representing the table in the database.
+
+    Methods
+    -------
+    connect()
+        Establishes a connection to the database.
+    insert_data(table_name, df, path_to_csv)
+        Creates a table in the database and inserts data from a DataFrame or a CSV file.
+    create_table(table_name, df)
+        Creates a table in the database based on the DataFrame columns and their data types.
+    infer_data_types(df)
+        Analyzes the data types of the DataFrame columns and returns a list of columns with their data types.
+    infer_sql_type(series)
+        Maps the Pandas data types to SQL data types.
+    roundup(x)
+        Rounds up a number to the nearest 10.
+    """
+
     def __init__(self, server, database):
+        """
+        Constructs all the necessary attributes for the DatabaseImporter object.
+
+        :param server: str
+            The server where the database is hosted.
+        :param database: str
+            The name of the database to connect to.
+        """
         self.server = server
         self.database = database
         self.engine = None
@@ -18,8 +59,15 @@ class DatabaseImporter:
 
     def connect(self):
         """
-        Connect to the database
-        :return:
+        Establishes a connection to the database.
+
+        This method uses the server and database attributes of the DatabaseImporter instance to form the connection
+        string. The connection is established using SQLAlchemy's create_engine function, with the fast_executemany
+        and echo parameters set to True. If the connection is successful, the method logs a success message. If an
+        exception occurs during the connection process, the method logs the error and re-raises the exception.
+
+        :raises Exception:
+            If there is an error connecting to the database.
         """
         try:
             logger.info(f'Connecting to database {self.server}/{self.database}')
@@ -32,12 +80,22 @@ class DatabaseImporter:
 
     def insert_data(self, table_name, df, path_to_csv):
         """
-        Creates table in the database and insert data
-        Uses BULK INSERT for faster data insertion
-        :param table_name:
-        :param df:
-        :param path_to_csv:
-        :return:
+        Creates a table in the database and inserts data from a DataFrame or a CSV file.
+
+        This method first establishes a connection to the database, then creates a table in the database based on the
+        DataFrame columns and their data types. If the DataFrame has less than 1,000,000 rows, the data is inserted
+        into the table in batches of 10,000 rows. If the DataFrame has 1,000,000 rows or more, the data is inserted
+        into the table using a BULK INSERT query. If an exception occurs during the data insertion process, the method
+        logs the error and re-raises the exception.
+
+        :param table_name: str
+            The name of the table to be created in the database.
+        :param df: DataFrame
+            The DataFrame containing the data to be inserted into the table.
+        :param path_to_csv: str
+            The path to the CSV file containing the data to be inserted into the table.
+        :raises Exception:
+            If there is an error inserting data into the table.
         """
         try:
             self.connect()
@@ -77,13 +135,20 @@ class DatabaseImporter:
 
     def create_table(self, table_name, df):
         """
-        Dynamically creates table in the database based on the DataFrame columns and their data types
-        Adds Clustered Columnstore index to the table
-        Database schema is hardcoded to dbo
-        Drops a table if it already exists
-        :param table_name:
-        :param df:
-        :return:
+        Creates a table in the database based on the DataFrame columns and their data types.
+
+        This method first defines a custom compiler for the CreateIndex function that creates a clustered columnstore
+        index. It then creates a new table in the database with the same columns as the DataFrame, and adds a clustered
+        columnstore index to the table. If a table with the same name already exists in the database, it is dropped
+        before the new table is created. If an exception occurs during the table creation process, the method logs the
+        error and re-raises the exception.
+
+        :param table_name: str
+            The name of the table to be created in the database.
+        :param df: DataFrame
+            The DataFrame based on which the table is to be created.
+        :raises Exception:
+            If there is an error creating the table.
         """
         try:
             @compiles(CreateIndex, "mssql")
@@ -115,9 +180,18 @@ class DatabaseImporter:
 
     def infer_data_types(self, df):
         """
-        Analyzes the data types of the DataFrame columns and returns a list of columns with their data types
-        :param df:
-        :return:
+        Analyzes the data types of the DataFrame columns and returns a list of columns with their data types.
+
+        This method iterates over the columns of the DataFrame and infers their data types using the infer_sql_type
+        method. It returns a list of Column objects with the inferred data types. If an exception occurs during the
+        data type inference process, the method logs the error and re-raises the exception.
+
+        :param df: DataFrame
+            The DataFrame for which to infer the data types.
+        :return: list
+            A list of Column objects with the inferred data types.
+        :raises Exception:
+            If there is an error inferring the data types.
         """
         try:
             columns = []
@@ -131,10 +205,22 @@ class DatabaseImporter:
 
     def infer_sql_type(self, series):
         """
-        Maps the Pandas data types to SQL data types
-        :return:
-        :param series:
-        :return:
+        Maps the Pandas data types to SQL data types.
+
+        This method checks the data type of a Pandas Series and returns the corresponding SQL data type. If the Series
+        contains float data, it returns a DECIMAL data type. If the Series contains numeric data, it returns an Integer
+        or BigInteger data type depending on the maximum and minimum values in the Series. If the Series contains
+        datetime data, it returns a DateTime data type. If the Series contains string data, it returns a String, NVARCHAR,
+        or DATE data type depending on the contents of the strings. If the Series contains boolean data, it returns a
+        Boolean data type. If the Series contains any other data type, it returns a String data type. If an exception
+        occurs during the data type mapping process, the method logs the error and re-raises the exception.
+
+        :param series: Series
+            The Pandas Series for which to infer the SQL data type.
+        :return: TypeEngine
+            The SQLAlchemy TypeEngine object representing the inferred SQL data type.
+        :raises Exception:
+            If there is an error inferring the SQL data type.
         """
         try:
             if pd.api.types.is_float_dtype(series):
@@ -164,4 +250,15 @@ class DatabaseImporter:
 
     @staticmethod
     def roundup(x):
+        """
+        Rounds up a number to the nearest 10.
+
+        This method takes a number and rounds it up to the nearest 10. It uses the math.ceil function to round up the
+        number divided by 10, then multiplies the result by 10.
+
+        :param x: int
+            The number to be rounded up.
+        :return: int
+            The number rounded up to the nearest 10.
+        """
         return math.ceil(x / 10.0) * 10

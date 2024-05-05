@@ -9,10 +9,18 @@ from csv_file_handler import CSVFileHandler
 from database_importer import DatabaseImporter
 from data_migrator import DataMigrator
 
+# Setting up logger
 logger = logging.getLogger(__name__)
 
 
 def setup_logging(default_path='logging.yaml', default_level=logging.INFO, env_key='LOG_CFG'):
+    """
+    Set up logging configuration.
+
+    :param default_path: The default path for the logging configuration file.
+    :param default_level: The default logging level.
+    :param env_key: The environment variable key for the logging configuration file path.
+    """
     path = default_path
     value = os.getenv(env_key, None)
     if value:
@@ -29,10 +37,9 @@ def archive_file(csv_file_path, complete_file_path, archive_dir_path):
     """
     Archive the CSV file and move the .complete file
 
-    :param csv_file_path:
-    :param complete_file_path:
-    :param archive_dir_path:
-    :return:
+    :param csv_file_path: The path of the CSV file to be archived.
+    :param complete_file_path: The path of the .complete file to be moved.
+    :param archive_dir_path: The path of the directory where the files will be moved.
     """
     try:
         logger.info(f'Archiving file {csv_file_path} to {archive_dir_path}')
@@ -55,6 +62,14 @@ def archive_file(csv_file_path, complete_file_path, archive_dir_path):
 
 
 def main(path, server, database_stg, database_dwh):
+    """
+    Main function to import data from CSV to SQL, archive the files and run the data migration process.
+
+    :param path: The path of the CSV files.
+    :param server: The SQL server name.
+    :param database_stg: The SQL STG database name.
+    :param database_dwh: The SQL DWH database name.
+    """
     setup_logging(default_level=logging.DEBUG)
 
     try:
@@ -91,6 +106,7 @@ def main(path, server, database_stg, database_dwh):
 
 
 if __name__ == '__main__':
+    # Argument parser for command line arguments
     parser = argparse.ArgumentParser(description='Data Importer from CSV to SQL')
     parser.add_argument('--path', type=str, required=True, help='CSV file path')
     parser.add_argument('--server', type=str, required=True, help='SQL Server name to import data')

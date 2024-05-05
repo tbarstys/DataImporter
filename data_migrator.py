@@ -8,31 +8,56 @@ from concurrent.futures import ThreadPoolExecutor
 from database_connector import DatabaseConnector
 from datetime import datetime
 
+# Setting up logger
 logger = logging.getLogger(__name__)
 Base = declarative_base()
 
 
 class DataMigrator:
     """
-    The DataMigrator class is responsible for migrating data from a staging database to a data warehouse.
+    A class used to migrate data from a staging database to a data warehouse.
 
-    Attributes:
-        stg_engine (Engine): The SQLAlchemy engine object representing the staging database connection.
-        dwh_engine (Engine): The SQLAlchemy engine object representing the data warehouse database connection.
-        stg_metadata (MetaData): The MetaData object for the staging database.
-        dwh_metadata (MetaData): The MetaData object for the data warehouse database.
-        session_stg (Session): The SQLAlchemy session object for the staging database.
-        session_dwh (Session): The SQLAlchemy session object for the data warehouse database.
+    ...
+
+    Attributes
+    ----------
+    stg_engine : Engine
+        The SQLAlchemy engine object representing the staging database connection.
+    dwh_engine : Engine
+        The SQLAlchemy engine object representing the data warehouse database connection.
+    stg_metadata : MetaData
+        The MetaData object for the staging database.
+    dwh_metadata : MetaData
+        The MetaData object for the data warehouse database.
+    session_stg : Session
+        The SQLAlchemy session object for the staging database.
+    session_dwh : Session
+        The SQLAlchemy session object for the data warehouse database.
+
+    Methods
+    -------
+    hash_row(row)
+        Hashes a database row.
+    get_staging_tables()
+        Returns a list of tables from the staging database.
+    ensure_dwh_table(stg_table_name)
+        Ensures the DWH table exists and matches the staging table schema, with additional SCD columns.
+    process_table(stg_table_name)
+        Processes a table from the staging database and migrates it to the data warehouse.
+    run_migration()
+        Runs the data migration process for all staging tables.
     """
 
     def __init__(self, server, stg_database, dwh_database):
         """
-        The constructor for the DataMigrator class.
+        Constructs all the necessary attributes for the DataMigrator object.
 
-        Parameters:
-            server (str): The server where the databases are hosted.
-            stg_database (str): The name of the staging database to connect to.
-            dwh_database (str): The name of the data warehouse database to connect to.
+        :param server: str
+            The server where the databases are hosted.
+        :param stg_database: str
+            The name of the staging database to connect to.
+        :param dwh_database: str
+            The name of the data warehouse database to connect to.
         """
         self.stg_engine = DatabaseConnector(server, stg_database).connect()
         self.dwh_engine = DatabaseConnector(server, dwh_database).connect()
@@ -43,7 +68,14 @@ class DataMigrator:
 
     @staticmethod
     def hash_row(row):
-        """Hashes a database row."""
+        """
+        Hashes a database row.
+
+        :param row: tuple
+            The row to be hashed.
+        :return: str
+            The hash of the row.
+        """
         try:
             logger.debug(f"Hashing row: {row}")
             row_data = ''.join(str(col) for col in row)
@@ -57,8 +89,8 @@ class DataMigrator:
         """
         Returns a list of tables from the staging database.
 
-        Returns:
-            list: A list of table names from the staging database.
+        :return: list
+            A list of table names from the staging database.
         """
         with self.stg_engine.connect() as conn:
             return conn.execute(
@@ -68,11 +100,10 @@ class DataMigrator:
         """
         Ensures the DWH table exists and matches the staging table schema, with additional SCD columns.
 
-        Parameters:
-            stg_table_name (str): The name of the staging table.
-
-        Returns:
-            str: The name of the DWH table.
+        :param stg_table_name: str
+            The name of the staging table.
+        :return: str
+            The name of the DWH table.
         """
         logger.debug(f"Ensuring DWH table for {stg_table_name}")
         region_code, dwh_table_name = stg_table_name.split('_', 1)
@@ -94,6 +125,12 @@ class DataMigrator:
         return dwh_table_name
 
     def process_table(self, stg_table_name):
+        """
+        Processes a table from the staging database and migrates it to the data warehouse.
+
+        :param stg_table_name: str
+            The name of the staging table.
+        """
         logger.info(f"Processing table {stg_table_name}")
         dwh_table_name = self.ensure_dwh_table(stg_table_name)
         stg_table = Table(stg_table_name, self.stg_metadata, autoload_with=self.stg_engine)

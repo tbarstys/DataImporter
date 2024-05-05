@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/Tests/TestDataMigrator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestDatabaseConnector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_migrator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database_connector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
+    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Add data migrator class and some tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/TestArchiveFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestArchiveFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/TestCSVFileHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestCSVFileHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csv_file_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/csv_file_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_migrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_migrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database_importer.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_importer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -27,6 +22,7 @@
       <list>
         <option value="Python Script" />
         <option value="Python Unit Test" />
+        <option value="Setup Script" />
       </list>
     </option>
   </component>
@@ -57,42 +53,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.All Python tests.executor": "Run",
-    "Python tests.Python tests for TestArchiveFile.TestArchiveFile.executor": "Run",
-    "Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path.executor": "Run",
-    "Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_with_exception.executor": "Run",
-    "Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files.executor": "Run",
-    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.executor": "Run",
-    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist.executor": "Debug",
-    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_exists.executor": "Run",
-    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval.executor": "Run",
-    "Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval_no_tables.executor": "Run",
-    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_connection_exception.executor": "Run",
-    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection.executor": "Run",
-    "Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection_dwh.executor": "Run",
-    "Python tests.Python tests for TestSetupLogging.TestSetupLogging.executor": "Run",
-    "Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile.executor": "Run",
-    "Python tests.Python tests for test_main.TestArchiveFile.executor": "Run",
-    "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_happy_path.executor": "Run",
-    "Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_with_exception.executor": "Run",
-    "Python tests.Python tests in Tests.executor": "Run",
-    "Python.main.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.qodana"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.All Python tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestArchiveFile.TestArchiveFile.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_with_exception.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestCSVFileHandler.TestCSVFileHandler.test_list_eligible_files_with_some_valid_files.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDataMigrator.DataMigratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist.executor&quot;: &quot;Debug&quot;,
+    &quot;Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_exists.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval_no_tables.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_connection_exception.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestDatabaseConnector.TestDatabaseConnector.test_successful_connection_dwh.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for TestSetupLogging.TestSetupLogging.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for Tests.TestArchiveFile.TestArchiveFile.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.TestArchiveFile.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_happy_path.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.TestArchiveFile.test_archive_file_with_exception.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.qodana&quot;
   }
-}]]></component>
+}</component>
   <component name="QodanaCIConfigService">
     <option name="ciType" value="GITHUB" />
     <option name="path" value="$PROJECT_DIR$/.github/workflows/qodana_code_quality.yml" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.Python tests in Tests">
     <configuration name="Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="DataImport" />
       <option name="ENV_FILES" value="" />
@@ -179,9 +175,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests in Tests" />
-        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
         <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_staging_tables_retrieval" />
         <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest.test_dwh_table_does_not_exist" />
+        <item itemvalue="Python tests.Python tests for TestDataMigrator.DataMigratorTest" />
         <item itemvalue="Python tests.Python tests for TestArchiveFile.TestArchiveFile.test_archive_file_happy_path" />
       </list>
     </recent_temporary>
@@ -209,7 +205,14 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1713827704360</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="Add data migrator class and some tests">
+      <option name="closed" value="true" />
+      <created>1714857444771</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1714857444771</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,7 +228,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Add data migrator class and some tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add data migrator class and some tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
