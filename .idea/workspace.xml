@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Add Tests">
+    <list default="true" id="89ce79c9-df0b-47b2-8a16-4feae0a54347" name="Changes" comment="Update data migrator logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_migrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_migrator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -233,7 +234,14 @@
       <option name="presentableId" value="LOCAL−00005" />
       <updated>1714912202431</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL−00006" summary="Update data migrator logic">
+      <option name="closed" value="true" />
+      <created>1715041192121</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1715041192121</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -253,18 +261,10 @@
     <MESSAGE value="Add Docs" />
     <MESSAGE value="Add README.md" />
     <MESSAGE value="Add Tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Tests" />
+    <MESSAGE value="Update data migrator logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update data migrator logic" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/data_migrator.py</url>
-          <line>144</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="stg_table" />
