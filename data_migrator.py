@@ -1,5 +1,5 @@
 import logging
-from sqlalchemy import MetaData, Table, select, and_, Column, Integer, String, DateTime, text
+from sqlalchemy import MetaData, Table, select, and_, Column, Integer, String, DateTime, text, literal_column
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -102,8 +102,8 @@ class DataMigrator:
 
         :param stg_table_name: str
             The name of the staging table.
-        :return: str
-            The name of the DWH table.
+        :return: str, str
+            The name of the Region code and  the DWH table.
         """
         logger.debug(f"Ensuring DWH table for {stg_table_name}")
         region_code, dwh_table_name = stg_table_name.split('_', 1)
@@ -114,15 +114,12 @@ class DataMigrator:
             if not self.dwh_engine.dialect.has_table(conn, dwh_table_name):
                 columns = [Column(col.name, col.type) for col in stg_table.columns.values()] + [
                     Column('RegionCode', String(10), default=region_code),
-                    Column('RowHash', String(64)),
-                    Column('IsActive', Integer, default=1),
-                    Column('ValidFrom', DateTime, default=datetime.now()),
-                    Column('ValidTo', DateTime)
+                    Column('LoadDate', DateTime, default=datetime.now()),
                 ]
                 dwh_table = Table(dwh_table_name, self.dwh_metadata, *columns, extend_existing=True)
                 logger.debug(f"Creating DWH table {dwh_table_name}")
                 dwh_table.create(self.dwh_engine)
-        return dwh_table_name
+        return region_code, dwh_table_name
 
     def process_table(self, stg_table_name):
         """
@@ -132,7 +129,7 @@ class DataMigrator:
             The name of the staging table.
         """
         logger.info(f"Processing table {stg_table_name}")
-        dwh_table_name = self.ensure_dwh_table(stg_table_name)
+        region_code, dwh_table_name = self.ensure_dwh_table(stg_table_name)
         stg_table = Table(stg_table_name, self.stg_metadata, autoload_with=self.stg_engine)
         dwh_table = Table(dwh_table_name, self.dwh_metadata, autoload_with=self.dwh_engine)
 
@@ -140,25 +137,20 @@ class DataMigrator:
         session_dwh = self.session_dwh()
 
         try:
-            # Fetch data from the staging table
-            stg_rows = session_stg.execute(select(stg_table)).fetchall()
-            logger.debug(f"Processing {len(stg_rows)} rows from {stg_table_name}")
-            for stg_row in stg_rows:
-                row_hash = self.hash_row(stg_row)
-                # Check if the row already exists and is active
-                existing_row = session_dwh.execute(
-                    select(dwh_table).where(and_(dwh_table.c.RowHash == row_hash, dwh_table.c.IsActive == 1))).first()
-                if not existing_row:
-                    # Convert the row to a dictionary
-                    row_dict = {column: value for column, value in zip(stg_table.columns.keys(), stg_row)}
-                    # Insert new active row
-                    new_row = {**row_dict, 'RowHash': row_hash, 'IsActive': 1, 'ValidFrom': datetime.now(),
-                               'ValidTo': None}
-                    session_dwh.execute(dwh_table.insert(), new_row)
-                    # Deactivate old rows
-                    session_dwh.execute(dwh_table.update().where(dwh_table.c.RowHash != row_hash)
-                                        .values(IsActive=0,
-                                                ValidTo=datetime.now()))
+            logger.info(f"Truncating table {dwh_table_name} in DWH")
+            session_dwh.execute(text(f"TRUNCATE TABLE [dbo].{dwh_table_name}"))
+
+            logger.info(f"Inserting data from {stg_table_name} to {dwh_table_name}")
+            select_stg = select(stg_table)
+            data_to_insert = session_stg.execute(select_stg).fetchall()
+
+            if data_to_insert:
+                session_dwh.execute(dwh_table.insert(), [row._asdict() for row in data_to_insert])
+                session_dwh.commit()
+                logger.info(f"Inserted {len(data_to_insert)} rows to {dwh_table_name}")
+            else:
+                logger.info("No data found to insert.")
+
             session_dwh.commit()
         except SQLAlchemyError as e:
             session_dwh.rollback()
